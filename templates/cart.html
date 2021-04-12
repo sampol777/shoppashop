@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    {% if session['TotalCartItems'] != '0' %}
+    <table id='cart-table' class="table table-sm">
+        <thead>
+            <th>Sr</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Edit/Delete</th>
+            
+        </thead>
+        <tbody>
+            {% for key, product in session['Shoppingcart'].items() %}
+            <tr id='{{key}}'>
+                <td>{{loop.index}}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.color }}</td>
+                <td>{{ product.price }}</td>
+                {% set subtotal = product.quantity|int * product.price|float %}
+                <form action="{{url_for('updatecart', code=key)}}" method='POST'>
+                <td><input type="number" name="quantity" min="1" max="30" value="{{product.quantity}}"><button type="submit" class=" btn-info">Edit</button></td>
+                <td>{{subtotal}}</td>
+                <td><button id='delete-button' class=" btn-danger delete-button">Delete</button></td>
+            </form>
+            </tr>
+            {% endfor %}
+            
+            
+        </tbody>   
+    </table>
+    <p>Total order price:{{totalorder}}</p>
+    <p>
+        <a href="http://127.0.0.1:5000/placeorder" class="btn btn-primary active">Place order</a>
+    </p>
+</div>
+{% else %}
+<h1 class="text-center m-5 p-5">Cart is empty!</h1>
+{% endif %}
+{% endblock %}

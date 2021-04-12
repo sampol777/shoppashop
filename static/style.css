@@ -1,0 +1,105 @@
+
+
+img {
+    object-fit: cover;
+
+}
+
+hr {
+    border-top: 3px double #8c8b8b;
+}
+
+ul {
+    list-style-type: none;
+  }
+
+form {
+    width: 50%;
+}
+
+.carouselimg {
+    max-height: 50vh;
+    object-fit: contain;
+}
+
+.wide {
+    width: 100% !important;
+}
+
+.card {
+    width: 320px;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: 0.5s;
+    
+}
+
+.btn-edit{
+    width: 80%;
+}
+
+button {
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    transition: 0.5s;
+}
+
+button:hover {
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.card:hover {
+    -webkit-transform: translateY(5px);
+    -moz-transform: translateY(5px);
+    transform: translateY(5px);
+    box-shadow: 0 8px 6px -6px black !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.quantity-buy {
+    width: 100%;
+}
+
+.form-container {
+    margin: 100px auto;
+}
+
+.form-input-field {
+    max-width: 100%;
+    
+}
+
+.form-input-field,
+.form-label {
+    padding-left: 0;
+}
+
+
+@media(max-width:760px){
+    form {
+        width: 70%;
+    }
+}
+
+@media(max-width:450px){
+    form {
+        width: 95%;
+    }
+
+    .card{
+        width: 95%;
+        margin: 0 !important;
+        margin-bottom: 30px !important;
+    }
+
+    
+    
+}  

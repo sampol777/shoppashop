@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% from '_formhelpers.html' import render_field %}
+{% block content %}
+<br>
+<div class="container">
+<div class="text-center">
+    <h1>Hello {{user.username}}
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Edit user
+      </button>
+    </h1>
+    <h4>Role: {{user.role.role_name}}</h4>
+    <br>
+    {% if user.role.role_name != 'buyer' %}
+    <h3>Products: <a href="/addproduct" class="btn btn-info" role="button">Add new</a>
+      <a href="{{url_for('showProdList')}}" class="btn btn-info" role="button">Products list</a></h3>
+    {% endif %}  
+    <br>
+    <h3>Recent orders </h3>
+    {% if user.role.role_name != 'buyer' %}
+    <table class="table table-striped table-sm">
+        <thead>
+            <th>Sr</th>
+            <th>Order ID</th>
+            <th>Product name</th>
+            <th>Color</th>
+            <th>Quantity</th>
+            <th>Unit price</th>
+            <th>Subtotal</th>
+        </thead>  
+        <tbody>
+         {% for key, order in orders.items() %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{ order.order }}</td>
+                    <td>{{ order.product_name }}</td>
+                    <td>{{ order.product_color }}</td>
+                    <td>{{ order.unit_price }}</td>
+                    <td>{{order.quantity}}</td>
+                    <td>{{order.total}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+         {% for page_num in productorders.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+         {% if page_num %}
+           {% if productorders.page == page_num %}
+            <a class="btn btn-info" href="{{ url_for('accountShow', page=page_num)}}">{{ page_num }}</a>
+           {% else %}
+            <a class="btn btn-outline-info" href="{{ url_for('accountShow', page=page_num)}}">{{ page_num }}</a>
+           {% endif %}
+         {% else %}
+            ... 
+         {% endif %}   
+         {% endfor %}
+    
+</div>
+</div>
+{% endif %}
+
+<!-- buyer orders -->
+{% if user.role.role_name == 'buyer' %}   
+{% for order in orders.items %}
+<h3 class="mt-4 ml-4 text-left">Order ID:{{order.id}}</h3>
+  
+    <table class="table table-sm">
+        <thead>
+            <th>Sr</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </thead>
+        <tbody>
+            {% for product in order.products %}
+            <tr>
+                <td>{{loop.index}}</td>
+                {% if product.seller_product %}
+                <td>{{ product.seller_product.product.name }}</td>
+                <td>{{ product.seller_product.product.color }}</td>
+                <td>{{ product.seller_product.unit_price }}</td>
+                {% else %}
+                {% set price = product.total / product.quantity %}
+                <td>Deleted</td>
+                <td>Deleted</td>
+                <td>{{price}}</td>
+                 {% endif %}
+                <td>{{product.quantity}}</td>
+                <td>{{product.total}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+    <p> Order total: {{order.subtotal}}</p>
+    <hr class="bold">
+{% endfor %}
+
+{% for page_num in orders.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+         {% if page_num %}
+           {% if orders.page == page_num %}
+            <a class="btn btn-info" href="{{ url_for('accountShow', page=page_num)}}">{{ page_num }}</a>
+           {% else %}
+            <a class="btn btn-outline-info" href="{{ url_for('accountShow', page=page_num)}}">{{ page_num }}</a>
+           {% endif %}
+         {% else %}
+            ... 
+         {% endif %}   
+         {% endfor %}
+
+{% endif %}
+
+<form class="d-flex justify-content-center p-2 m-auto " method="POST" action="/delete_user" class="form-inline">
+  <button class="btn btn-outline-danger ">Delete Profile</button>
+</form>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalCenterTitle">Edit user</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <!-- <div class="container  mt-5"> -->
+                <form class="form-container" method = "POST" action = "/account">
+                    {{ form.csrf_token }}
+                    {{ render_field(form.username, value= user.username) }}
+                    {{ render_field(form.email, value=user.email) }}
+                    {{ render_field(form.password, placeholder="password") }}
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+               
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+{% endblock %}

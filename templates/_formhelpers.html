@@ -1,0 +1,39 @@
+{% macro render_field(field) %}
+<div class="form-group">
+    <label for="{{field.name}}" class = "col-lg-2 form-label control-label">{{field.label.text}}</label>
+    <div class="col-lg-10 form-input-field">
+       {{field(class_= 'form-control', **kwargs)| safe}}
+       <ul>
+       {% for er in field.errors %}
+       <li style = "color:red;">{{er}}</li>
+       {% endfor %}
+       </ul>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_radio_fields(field) %}
+<div class="form-group d-flex justify-content-left">
+    {% for subfield in field %}
+    <div class="radio pr-5 mr-5">
+        <label> 
+         {{ subfield }}
+         Register as {{ subfield.label.text }}    
+        </label>
+    </div>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro render_hidden_field(field) %}
+{{field(class_= 'form-control', **kwargs)| safe}}
+{% endmacro %}
+
+{% macro render_choices(field) %}
+<div class="form-group d-flex justify-content-around">
+    <label for="{{field.name}}" class = "col-lg-3 control-label pt-1">{{field.label.text}}:</label>
+    <div class="col-lg-3 p-0" width="50">
+       {{field(class_= 'form-control', **kwargs)| safe}}
+    </div>
+</div>
+{% endmacro %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% from '_formhelpers.html' import render_field, render_hidden_field %}
+{% block content %}
+<div class="text-center">
+  <h1>Products list <a href="/addproduct" class="btn btn-info" role="button">Add new</a>
+    <a href="{{url_for('accountShow')}}" class="btn btn-info" role="button">Back</a></h1>
+{% for page_num in products.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+      {% if products.page == page_num %}
+       <a class="btn btn-info mt-3" href="{{ url_for('showProdList', page=page_num)}}">{{ page_num }}</a>
+      {% else %}
+       <a class="btn btn-outline-info mt-3" href="{{ url_for('showProdList', page=page_num)}}">{{ page_num }}</a>
+      {% endif %}
+    {% else %}
+       ... 
+    {% endif %}   
+    {% endfor %}
+<div id="seller-products" class="container-fluid d-flex justify-content-around flex-wrap pt-4">
+    
+    {% for product in products.items %}
+     <div class="card shadow mb-5 mt-5 ml-4 mr-4 p-0">
+       <img src="{{product.product.image}}" alt="{{product.product.name}}" class="card-img-top" height="350">
+        <div data-product-id='{{product.id}}' class="card-body col-lg-12 pb-1">
+          <h5 data-product-name='{{product.product.name}}' data-product-color= '{{product.product.color}}' class="text-center">{{product.product.name}} | {{product.product.color}}</h5>
+          <p  data-product-price='{{product.unit_price}}' data-product-stock='{{product.stock}}' class="text-center">Price: ${{product.unit_price}} | In stock: {{product.stock}}</p>
+          <button id='edit-button' class="btn-sm btn-primary mr-2" data-toggle="modal" data-target="#exampleModalCenter">Edit product</button>
+          <button id='delete-button' class="btn-sm btn-danger">Delete product</button>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalCenterTitle">Edit user</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            
+                <form id="product-edit-form" class="form-container" method = "POST" action = "/account/product_list">
+                    {{ form.csrf_token }}
+                    {{render_hidden_field(form.sellerproduct_id)}}
+                    {{ render_field(form.password, placeholder="password") }}
+                    {{ render_field(form.price, placeholder=form.price.label.text) }}
+                    {{ render_field(form.stock, placeholder=form.stock.label.text) }}
+                   
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+               
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
