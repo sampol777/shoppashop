@@ -9,9 +9,8 @@ import os, sys, subprocess, platform
 
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
-import pdfkit
 import datetime
-
+import pydf
 
 
 app = Flask(__name__)
@@ -28,13 +27,6 @@ app.config['SQLALCHEMY_ECHO'] = True
 
 connect_db(app)
 
-if platform.system() == "Windows":
-        pdfkit_config = pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'))
-else:
-        os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable) 
-        WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], 
-            stdout=subprocess.PIPE).communicate()[0].strip()
-        pdfkit_config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
 
 @app.before_request
 def add_user_to_sess():
@@ -421,19 +413,11 @@ def sendTodaysOrders():
         return
  
 
-def _get_pdfkit_config():
-     
-     if platform.system() == 'Windows':
-         return pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltox\\bin\\wkhtmltopdf.exe'))
-     else:
-         WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], stdout=subprocess.PIPE).communicate()[0].strip()
-         return pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
 
-
-def sendEmailToBuyer(order,sessInfo):
+def sendEmailToBuyer(email, order,sessInfo):
     rendered = render_template('pdf_template_buyer.html', order = order,session = sessInfo)
-    pdf = pdfkit.from_string(rendered, False, configuration=_get_pdfkit_config())
-    msg = Message('Thank you for your order', sender = 'shoppyshopshop683@gmail.com', recipients = ['shoppyshopshop683@gmail.com'])
+    pdf = pydf.generate_pdf(rendered)
+    msg = Message('Thank you for your order', sender = 'shoppyshopshop683@gmail.com', recipients = [email])
     msg.attach("order.pdf", "application/pdf", pdf)
     mail.send(msg)
     return print('mail sent')
@@ -444,10 +428,11 @@ def submitOrder():
     
     order = Order(buyer_id = session['user_id'], subtotal = session['TotalOrder'])
     buyer = User.query.filter_by(id = session['user_id']).first()
+    email = buyer.email
     db.session.add(order)
     db.session.commit()
     
-    sendEmailToBuyer(order, session['Shoppingcart'])
+    sendEmailToBuyer(email,order, session['Shoppingcart'])
 
     for key, product in session['Shoppingcart'].items():
         sellersproduct = SellerProductInfo.query.filter_by(id = key).first()
