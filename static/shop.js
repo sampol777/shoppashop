@@ -97,7 +97,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
 
  });
 
- $("#cart-table").on("click", "#delete-button", async function (evt) {
+ $("#cart-table").on("click", "#cart-delete-button", async function (evt) {
    evt.preventDefault();
    console.log('pressed')
    let product = $(evt.target).closest('tr');
@@ -112,7 +112,9 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
          }
       });
 
+      setTimeout(function(){
+         location.reload()
+      }, 200);
    
-   location.reload()
 
  });
