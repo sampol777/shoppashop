@@ -97,27 +97,27 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
 
  });
 
- $("#cart-table").on("click", "#cart-delete-button", async function (evt) {
-   evt.preventDefault();
-   console.log('pressed')
-   let product = $(evt.target).closest('tr');
-   let quantity = $(product).closest('#quantity').closest('input').val()
-   let productId = product.attr("id");
+//  $("#cart-table").on("click", "#cart-delete-button", async function (evt) {
+//    evt.preventDefault();
+//    console.log('pressed')
+//    let product = $(evt.target).closest('tr');
+//    let quantity = $(product).closest('#quantity').closest('input').val()
+//    let productId = product.attr("id");
    
-   $.ajax({
-         type: "GET",
-         url: `/removefromcart/${productId}`,
-         success: function (data) {
-               console.log(data)  // display the returned data in the console.
-         }
-      });
-       console.log(quantity)
-       console.log($('#cart-items').text())
-      //$('#cart-items').text(String( Number($('#cart-items').text()) - Number(form.find("input").val())))
-      // if $('#cart-items').text()=="NAN"
+//    $.ajax({
+//          type: "GET",
+//          url: `/removefromcart/${productId}`,
+//          success: function (data) {
+//                console.log(data)  // display the returned data in the console.
+//          }
+//       });
+//        console.log(quantity)
+//        console.log($('#cart-items').text())
+//       //$('#cart-items').text(String( Number($('#cart-items').text()) - Number(form.find("input").val())))
+//       // if $('#cart-items').text()=="NAN"
 
-      product.remove()
+//       product.remove()
       
       
 
- });
+//  });
