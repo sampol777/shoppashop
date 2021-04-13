@@ -370,14 +370,13 @@ def removeFromCart(id):
     
     if request.method == 'DELETE':
         try:
-            session.modified = True
-            for key , item in session['Shoppingcart'].items():
-                
+            for key , item in session['Shoppingcart'].items(): 
                 if int(key)== id:
+                    session.modified = True
                     quantity = item['quantity']
                     session['Shoppingcart'].pop(key,None)
                     session['TotalCartItems'] = str(int(session['TotalCartItems']) - int(quantity))
-                    return redirect(url_for('showCart'))
+                    return jsonify(message="Deleted")
         except Exception as e:
             print('no coooooode')
             print(e)
