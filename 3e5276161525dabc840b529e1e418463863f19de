@@ -1,0 +1,65 @@
+[33mcommit 87721cb7e210bb75ad33df220646470e05d5b7c6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mheroku/master[m[33m)[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 22:41:33 2021 -0400
+
+    wkhtmtopdf again
+
+[33mcommit 90df89af27104bc2e51a9a663d0d1d03636dcb29[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 22:40:20 2021 -0400
+
+    wkhtmtopdf
+
+[33mcommit a56abce5e6a22358aed2b0d34e80fbdb7439547e[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 22:25:06 2021 -0400
+
+    requirements
+
+[33mcommit 3e5276161525dabc840b529e1e418463863f19de[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 21:58:55 2021 -0400
+
+    fix base.html
+
+[33mcommit 3e3d8a1a54ff735c397c52cefe8d1e81acd546de[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 21:53:41 2021 -0400
+
+    templates
+
+[33mcommit 31b2ba4ab83d02d190e26c29e3917af4d135ed7b[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 21:42:14 2021 -0400
+
+    added seed.py
+
+[33mcommit 2b4e3197d5204e3d4c4fc7693853f934e95c7d89[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 21:32:46 2021 -0400
+
+    add heroku psql url
+
+[33mcommit 04a49f4c04a3ff97853755a4b5902bfaf4aa7b0e[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 21:18:39 2021 -0400
+
+    add os for environ vars
+
+[33mcommit 117e607a382778163d5f061a162607e6855cbab8[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 20:06:02 2021 -0400
+
+    add route
+
+[33mcommit 4a6e13455f6ccb204ae6adb9f61f1c48be3c211e[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 18:59:36 2021 -0400
+
+    second try
+
+[33mcommit 99eb0e5003f24ce67e2bc5c2629035a8a511e537[m
+Author: Siamen Paliashchuk <sempol777@gmail.com>
+Date:   Mon Apr 12 18:40:44 2021 -0400
+
+    let's do it
