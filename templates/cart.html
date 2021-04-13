@@ -23,7 +23,7 @@
                 <td>{{ product.price }}</td>
                 {% set subtotal = product.quantity|int * product.price|float %}
                 <form action="{{url_for('updatecart', code=key)}}" method='POST'>
-                <td><input type="number" name="quantity" min="1" max="30" value="{{product.quantity}}"><button type="submit" class=" btn-info">Edit</button></td>
+                <td><input id="quantity" type="number" name="quantity" min="1" max="30" value="{{product.quantity}}"><button type="submit" class=" btn-info">Edit</button></td>
                 <td>{{subtotal}}</td>
                 </form>
                 <td><button id='cart-delete-button' class=" btn-danger ">Delete</button></td>

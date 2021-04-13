@@ -101,7 +101,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
    evt.preventDefault();
    console.log('pressed')
    let product = $(evt.target).closest('tr');
-   let form = $(product).closest('form')
+   let quantity = $(evt.target).closest('input #quantity')
    let productId = product.attr("id");
    
    $.ajax({
@@ -111,7 +111,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
                console.log(data)  // display the returned data in the console.
          }
       });
-      console.log(form.find("input").val)
+      console.log()
       console.log($('#cart-items').text())
       //$('#cart-items').text(String( Number($('#cart-items').text()) - Number(form.find("input").val())))
       // if $('#cart-items').text()=="NAN"
