@@ -1,8 +1,9 @@
-from app import app 
+
 from models import db , Product , Role
+from app import app
 
-
-
+db.drop_all()
+db.create_all()
 
 r1 = Role(
     role_name = "seller"
