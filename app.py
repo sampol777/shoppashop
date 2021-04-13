@@ -5,7 +5,7 @@ from flask import Flask,jsonify, render_template, request, flash, redirect, sess
 from sqlalchemy.exc import IntegrityError
 from forms import UserAddForm, UserEditForm, CheckPasswordForm, LoginForm, AddNewProduct, AddToCartForm, SearchProductForm, EditSellerProductForm
 from models import ProductOrderDetails, db, connect_db, User , Order , Product , Role, SellerProductInfo
-import os, subprocess, platform
+import os, sys, subprocess, platform
 
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
@@ -20,12 +20,6 @@ mail = Mail(app)
 s = URLSafeTimedSerializer('Thisissecret')
 
 
-if 'DYNO' in os.environ:
-    print ('loading wkhtmltopdf path on heroku')
-    WKHTMLTOPDF_CMD = subprocess.Popen(
-        ['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf-pack')], # Note we default to 'wkhtmltopdf' as the binary name
-        stdout=subprocess.PIPE).communicate()[0].strip()
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///shop_clone')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY', 'hellosecret1')
@@ -33,6 +27,14 @@ app.config['SQLALCHEMY_ECHO'] = True
 
 
 connect_db(app)
+
+if platform.system() == "Windows":
+        pdfkit_config = pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'))
+else:
+        os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable) 
+        WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], 
+            stdout=subprocess.PIPE).communicate()[0].strip()
+        pdfkit_config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
 
 @app.before_request
 def add_user_to_sess():
