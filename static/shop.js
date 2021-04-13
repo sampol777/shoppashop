@@ -105,14 +105,14 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
    let productId = product.attr("id");
    
    $.ajax({
-         type: "DELETE",
+         type: "GET",
          url: `/removefromcart/${productId}`,
          success: function (data) {
                console.log(data)  // display the returned data in the console.
          }
       });
-      // console.log(quantity)
-      // console.log($('#cart-items').text())
+       console.log(quantity)
+       console.log($('#cart-items').text())
       //$('#cart-items').text(String( Number($('#cart-items').text()) - Number(form.find("input").val())))
       // if $('#cart-items').text()=="NAN"
 

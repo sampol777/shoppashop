@@ -365,11 +365,11 @@ def updatecart(code):
             print(e)
             return redirect(url_for('showCart'))
 
-@app.route('/removefromcart/<int:id>', methods=['DELETE'])
+@app.route('/removefromcart/<int:id>', methods=['GET'])
 def removeFromCart(id):
     
     
-    if request.method == 'DELETE':
+    if request.method == 'GET':
         try:
             for key , item in session['Shoppingcart'].items(): 
                 if int(key)== id:
