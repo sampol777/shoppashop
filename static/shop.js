@@ -112,7 +112,6 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
          }
       });
 
-      location.reload()
-   
+        
 
  });
