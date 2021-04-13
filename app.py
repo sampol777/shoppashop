@@ -402,7 +402,7 @@ def sendTodaysOrders():
         
     
         rendered = render_template('pdf_template_seller.html',products = userproducts, seller = seller)
-        pdf = pdfkit.from_string(rendered, False)
+        pdf = pydf.generate_pdf(rendered)
         msg = Message('Your daily summary', sender = 'shoppyshopshop683@gmail.com', recipients = [seller.email])
         msg.attach("order.pdf", "application/pdf", pdf)
         mail.send(msg)
