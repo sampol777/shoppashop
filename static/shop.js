@@ -112,8 +112,6 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
          }
       });
 
-         setTimeout(function(){
-            location.reload()
-         }, 500);
+        
 
  });
