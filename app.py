@@ -20,7 +20,11 @@ mail = Mail(app)
 s = URLSafeTimedSerializer('Thisissecret')
 
 
-
+if 'DYNO' in os.environ:
+    print ('loading wkhtmltopdf path on heroku')
+    WKHTMLTOPDF_CMD = subprocess.Popen(
+        ['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf-pack')], # Note we default to 'wkhtmltopdf' as the binary name
+        stdout=subprocess.PIPE).communicate()[0].strip()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///shop_clone')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
