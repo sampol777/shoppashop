@@ -98,7 +98,6 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
  });
 
  $("#cart-table").on("click", "#cart-delete-button", async function (evt) {
-   evt.preventDefault();
    console.log('pressed')
    let product = $(evt.target).closest('tr');
    
