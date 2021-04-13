@@ -372,6 +372,7 @@ def removeFromCart(id):
         try:
             session.modified = True
             for key , item in session['Shoppingcart'].items():
+                print("************************************************************************")
                 print(id)
                 if int(key)== id:
                     print('worked')
