@@ -97,7 +97,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
 
  });
 
- $("#cart-table").on("click", "#cart-delete-button", async function (evt) {
+ $("#cart-table").on("click", "#delete-button", async function (evt) {
    evt.preventDefault();
    console.log('pressed')
    let product = $(evt.target).closest('tr');
@@ -106,7 +106,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
    
    $.ajax({
          type: "DELETE",
-         url: `http://127.0.0.1:5000/removefromcart/${productId}`,
+         url: `/removefromcart/${productId}`,
          success: function (data) {
                console.log(data)  // display the returned data in the console.
          }
