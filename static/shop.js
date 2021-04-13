@@ -101,7 +101,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
    evt.preventDefault();
    console.log('pressed')
    let product = $(evt.target).closest('tr');
-   let quantity = $(product).closest('#quantity').val()
+   let quantity = $(product).closest('form td input #quantity').val()
    let productId = product.attr("id");
    
    $.ajax({
