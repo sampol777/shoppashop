@@ -5,6 +5,7 @@ from flask import Flask,jsonify, render_template, request, flash, redirect, sess
 from sqlalchemy.exc import IntegrityError
 from forms import UserAddForm, UserEditForm, CheckPasswordForm, LoginForm, AddNewProduct, AddToCartForm, SearchProductForm, EditSellerProductForm
 from models import ProductOrderDetails, db, connect_db, User , Order , Product , Role, SellerProductInfo
+import os
 
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
@@ -14,7 +15,6 @@ import datetime
 
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
 app.config.from_pyfile('config.cfg')
 mail = Mail(app)
 s = URLSafeTimedSerializer('Thisissecret')
@@ -22,6 +22,7 @@ s = URLSafeTimedSerializer('Thisissecret')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///shop_clone'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY', 'hellosecret1')
 app.config['SQLALCHEMY_ECHO'] = True
 
 
