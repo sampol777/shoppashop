@@ -104,8 +104,9 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
    
    let productId = product.attr("id");
    console.log(productId)
+   
    $.ajax({
-         type: "POST",
+         type: "DELETE",
          url: `/removefromcart/${productId}`,
          success: function (data) {
                console.log(data)  // display the returned data in the console.

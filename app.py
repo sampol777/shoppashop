@@ -364,11 +364,11 @@ def updatecart(code):
             print(e)
             return redirect(url_for('showCart'))
 
-@app.route('/removefromcart/<int:id>', methods=['POST'])
+@app.route('/removefromcart/<int:id>', methods=['DELETE'])
 def removeFromCart(id):
     
     
-    if request.method == 'POST':
+    if request.method == 'DELETE':
         try:
             session.modified = True
             for key , item in session['Shoppingcart'].items():
