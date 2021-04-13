@@ -27,20 +27,20 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="http://127.0.0.1:5000/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://127.0.0.1:5000/signup">Sign up</a>
+              <a class="nav-link" href="/signup">Sign up</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:5000/login">Log in</a>
+                <a class="nav-link" href="/login">Log in</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:5000/account">Account</a>
+                <a class="nav-link" href="/account">Account</a>
               </li>
             
             <li class="nav-item">
-              <a id="cart" href="http://127.0.0.1:5000/cart" class="nav-link" tabindex="-1">Cart(<span id="cart-items">{{session['TotalCartItems']}}</span>)</a>
+              <a id="cart" href="/cart" class="nav-link" tabindex="-1">Cart(<span id="cart-items">{{session['TotalCartItems']}}</span>)</a>
             </li>
           </ul>
           {% block search %}
