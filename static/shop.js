@@ -98,12 +98,11 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
  });
 
  $("#cart-table").on("click", "#cart-delete-button", async function (evt) {
-   evt.preventDefault(); 
+   evt.preventDefault();
    console.log('pressed')
    let product = $(evt.target).closest('tr');
    
    let productId = product.attr("id");
-   console.log(productId)
    
    $.ajax({
          type: "DELETE",
@@ -113,6 +112,8 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
          }
       });
 
+     
+         location.reload()
       
    
 
