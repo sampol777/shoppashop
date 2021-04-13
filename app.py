@@ -426,7 +426,7 @@ def sendTodaysOrders():
 
 def sendEmailToBuyer(order,sessInfo):
     rendered = render_template('pdf_template_buyer.html', order = order,session = sessInfo)
-    pdf = pdfkit.from_string(rendered, False)
+    pdf = pdfkit.from_string(rendered, False, configuration=pdfkit_config )
     msg = Message('Thank you for your order', sender = 'shoppyshopshop683@gmail.com', recipients = ['shoppyshopshop683@gmail.com'])
     msg.attach("order.pdf", "application/pdf", pdf)
     mail.send(msg)
