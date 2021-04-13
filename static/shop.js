@@ -97,7 +97,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
 
  });
 
- $("#cart-table").on("click", "#cart-delete-button", async function (evt) {
+ $("#cart-table").on("click", "#cart-delete-button", function (evt) {
    evt.preventDefault();
    console.log('pressed')
    let product = $(evt.target).closest('tr');
@@ -117,7 +117,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
       // if $('#cart-items').text()=="NAN"
 
       product.remove()
-      history.go(0);
+      
       
 
  });

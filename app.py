@@ -376,7 +376,7 @@ def removeFromCart(id):
                     quantity = item['quantity']
                     session['Shoppingcart'].pop(key,None)
                     session['TotalCartItems'] = str(int(session['TotalCartItems']) - int(quantity))
-                    return jsonify(message="Deleted")
+                    return redirect(url_for('showCart'))
         except Exception as e:
             print('no coooooode')
             print(e)
