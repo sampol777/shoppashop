@@ -5,7 +5,7 @@ from flask import Flask,jsonify, render_template, request, flash, redirect, sess
 from sqlalchemy.exc import IntegrityError
 from forms import UserAddForm, UserEditForm, CheckPasswordForm, LoginForm, AddNewProduct, AddToCartForm, SearchProductForm, EditSellerProductForm
 from models import ProductOrderDetails, db, connect_db, User , Order , Product , Role, SellerProductInfo
-import os
+import os, subprocess
 
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
@@ -18,6 +18,12 @@ app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
 mail = Mail(app)
 s = URLSafeTimedSerializer('Thisissecret')
+
+if 'DYNO' in os.environ:
+    print ('loading wkhtmltopdf path on heroku')
+    WKHTMLTOPDF_CMD = subprocess.Popen(
+        ['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf-pack')], # Note we default to 'wkhtmltopdf' as the binary name
+        stdout=subprocess.PIPE).communicate()[0].strip()
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///shop_clone')
