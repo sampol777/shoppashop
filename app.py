@@ -385,12 +385,9 @@ def removeFromCart(id):
             return redirect(url_for('showCart'))
 
 #####################Methods to generate pdf email
-
-
- 
-
+@app.route('/sendTodaysOrders')
 def sendTodaysOrders():
-
+    
     products = ProductOrderDetails.query.join(Order).join(SellerProductInfo).filter(Order.order_date > datetime.datetime.today() - datetime.timedelta(days=1)).order_by(SellerProductInfo.seller_id.desc())
     
     users = [] 
@@ -413,6 +410,9 @@ def sendTodaysOrders():
         mail.send(msg)
         print('sent')
         return
+ 
+
+
 
 
 def sendEmailToBuyer(order,sessInfo):
