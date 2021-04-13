@@ -19,10 +19,7 @@ app.config.from_pyfile('config.cfg')
 mail = Mail(app)
 s = URLSafeTimedSerializer('Thisissecret')
 
-if (platform.system() == 'Darwin'):
-    config = pdfkit.configuration()
-else:
-    config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
+
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///shop_clone')
