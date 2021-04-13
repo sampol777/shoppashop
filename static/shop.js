@@ -111,9 +111,10 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
                console.log(data)  // display the returned data in the console.
          }
       });
+      
+      $('#cart-items').text(String( Number($('#cart-items').text()) - Number(form.find("input").val())))
 
-        
-      location.replace(location.pathname)     
-       
+      product.remove()
+      
 
  });
