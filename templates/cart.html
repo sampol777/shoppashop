@@ -26,7 +26,7 @@
                 <td id="quantity"><input  type="number" name="quantity" min="1" max="30" value="{{product.quantity}}"><button type="submit" class=" btn-info">Edit</button></td>
                 <td>{{subtotal}}</td>
                 </form>
-                <form action="{{url_for('removefromcart', code=key)}}" method='POST'>
+                <form action="{{url_for('removeFromCart', code=key)}}" method='POST'>
                 <td><button id='cart-delete-button' class=" btn-danger ">Delete</button></td>
                 </form>
             </tr>
