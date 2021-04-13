@@ -421,12 +421,18 @@ def sendTodaysOrders():
         return
  
 
-
+def _get_pdfkit_config():
+     
+     if platform.system() == 'Windows':
+         return pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltox\\bin\\wkhtmltopdf.exe'))
+     else:
+         WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], stdout=subprocess.PIPE).communicate()[0].strip()
+         return pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
 
 
 def sendEmailToBuyer(order,sessInfo):
     rendered = render_template('pdf_template_buyer.html', order = order,session = sessInfo)
-    pdf = pdfkit.from_string(rendered, False, configuration=pdfkit_config )
+    pdf = pdfkit.from_string(rendered, False, configuration=_get_pdfkit_config())
     msg = Message('Thank you for your order', sender = 'shoppyshopshop683@gmail.com', recipients = ['shoppyshopshop683@gmail.com'])
     msg.attach("order.pdf", "application/pdf", pdf)
     mail.send(msg)
