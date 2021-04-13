@@ -365,14 +365,14 @@ def updatecart(code):
             print(e)
             return redirect(url_for('showCart'))
 
-@app.route('/removefromcart/<int:id>', methods=['GET'])
-def removeFromCart(id):
+@app.route('/removefromcart/<int:code>', methods=['POST'])
+def removeFromCart(code):
     
     
-    if request.method == 'GET':
+    if request.method == 'POST':
         try:
             for key , item in session['Shoppingcart'].items(): 
-                if int(key)== id:
+                if int(key)== code:
                     session.modified = True
                     quantity = item['quantity']
                     session['Shoppingcart'].pop(key,None)
