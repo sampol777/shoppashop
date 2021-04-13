@@ -102,7 +102,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
    let product = $(evt.target).closest('tr');
    
    let productId = product.attr("id");
-   
+   console.log(productId)
    $.ajax({
          type: "DELETE",
          url: `/removefromcart/${productId}`,
@@ -111,9 +111,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
          }
       });
 
-      setTimeout(function(){
-         location.reload()
-      }, 200);
+      
    
 
  });
