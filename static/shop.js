@@ -101,7 +101,7 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
    evt.preventDefault();
    console.log('pressed')
    let product = $(evt.target).closest('tr');
-   
+   let form = $(product).closest('form')
    let productId = product.attr("id");
    
    $.ajax({
