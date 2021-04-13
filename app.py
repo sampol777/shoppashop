@@ -407,7 +407,7 @@ def sendTodaysOrders():
         msg.attach("order.pdf", "application/pdf", pdf)
         mail.send(msg)
         print('sent')
-        return
+        return redirect('/')
  
 
 
