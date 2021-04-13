@@ -97,11 +97,11 @@ $("#seller-products").on("click", "#edit-button",  function (evt) {
 
  });
 
- $("#cart-table").on("click", "#cart-delete-button", function (evt) {
+ $("#cart-table").on("click", "#cart-delete-button", async function (evt) {
    evt.preventDefault();
    console.log('pressed')
    let product = $(evt.target).closest('tr');
-   let quantity = $(product).closest('form td input #quantity').val()
+   let quantity = $(product).closest('#quantity').closest('input').val()
    let productId = product.attr("id");
    
    $.ajax({
