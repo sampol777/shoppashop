@@ -358,7 +358,8 @@ def updatecart(code):
                     print(product['quantity'])
                     session['TotalCartItems'] = str(int(session['TotalCartItems'])+ difference)
                     print(session['TotalCartItems'])
-                    return redirect(url_for('showCart'))
+                    return redirect(request.referrer)
+
         except Exception as e:
             print('no coooooode')
             print(e)
