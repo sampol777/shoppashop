@@ -39,14 +39,16 @@
               {% endif %}
               {% if session['user_id'] != 'None' and 'user_id' in session %}
               <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="/account">Account</a>
               </li>
+              { if user.role == "buyer"}
             <li class="nav-item">
               <a id="cart" href="/cart" class="nav-link" tabindex="-1">Cart(<span id="cart-items">{{session['TotalCartItems']}}</span>)</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
-            </li>
+              {% endif %}
             {% endif %}
           </ul>
           {% block search %}
