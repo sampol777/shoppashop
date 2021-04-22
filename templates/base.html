@@ -29,7 +29,7 @@
             <li class="nav-item active">
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
-            {% if session['user_id'] == 'None' %}
+            {% if session['user_id'] == 'None' or 'user_id' not in session %}
             <li class="nav-item">
               <a class="nav-link" href="/signup">Sign up</a>
             </li>
