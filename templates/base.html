@@ -37,7 +37,7 @@
                 <a class="nav-link" href="/login">Log in</a>
               </li>
               {% endif %}
-              {% if session['user_id'] != 'None' %}
+              {% if session['user_id'] != 'None' and 'user_id' in session %}
               <li class="nav-item">
                 <a class="nav-link" href="/account">Account</a>
               </li>
